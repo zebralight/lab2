@@ -169,17 +169,12 @@ result appropriately returned.
 What is calc_option's function signature? Implement calc_option.
 ......................................................................*)
 
-let calc_option (f : 'a -> 'a -> 'a) (a: 'a option) (b: 'a option) =
-  let check_none (x, y) =
-    match x, y with
-    | None, None -> None
-    | _, None -> x
-    | None, _ -> y in
-  match check_none(a,b) with
-    | a -> a
-    | b -> b
-    | None -> None
-    | _ -> f a b
+let calc_option (f : 'a option -> 'a option -> 'a option) (a: 'a option) (b: 'a option) =
+  match a, b with
+  | None, None -> None
+  | _, None -> a
+  | None, _ -> b
+  | _ -> f a b
 
      
 (*......................................................................
