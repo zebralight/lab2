@@ -70,7 +70,7 @@ let plus =
   uncurry ( + )
      
 let times =
-  fun _ -> failwith "times not implemented" ;;
+  uncurry ( * )
   
 (*......................................................................
 Exercise 3: Recall the prods function from Lab 1:
@@ -85,7 +85,7 @@ do you need the uncurried times function?
 ......................................................................*)
 
 let prods =
-  fun _ -> failwith "prods not implemented" ;; 
+  map (fun (x,y) -> times (x, y))
 
 (*======================================================================
 Part 2: Option types
@@ -118,8 +118,11 @@ Reimplement max_list, but this time, it should return an int option
 instead of an int.
 ......................................................................*)
 
-let max_list (lst : int list) : int option =
-  failwith "max_list not implemented" ;;
+let rec max_list (lst : int list) : int option =
+  match lst with
+    | [] -> None
+    | [x] -> Some x
+    | x :: rest -> (max (Some x) (max_list rest)) ;;
   
 (*......................................................................
 Exercise 5: Write a function to return the smaller of two int options,
