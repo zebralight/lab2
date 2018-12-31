@@ -45,13 +45,13 @@ Now implement the two functions curry and uncurry.
 ......................................................................*)
 
 let curry (f : ('a * 'a) -> 'a) : 'a -> 'a -> 'a = 
-  fun a -> fun b -> f a b
+  fun a -> fun b -> f(a, b)
 
 (*
 js version I needed one more "generation"
  var cur = f => a => b => f(a,b) *)
      
-let uncurry (f : 'a -> 'a -> 'a): 'a -> 'a -> 'a = fun (a, b) -> f a b
+let uncurry (f : 'a -> 'a -> 'a): ('a * 'a) -> 'a = fun (a, b) -> f a b
 
 (*......................................................................
 Exercise 2: OCaml's built in binary operators, like ( + ) and ( * ) are
