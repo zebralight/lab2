@@ -44,9 +44,9 @@ To think about before you start coding:
 Now implement the two functions curry and uncurry.
 ......................................................................*)
 
-let curry = fun _ -> failwith "curry not implemented" ;;
+let curry (f : 'a -> 'a -> 'a) (a: 'a) : 'a -> 'a = f a
      
-let uncurry = fun _ -> failwith "uncurry not implemented" ;;
+let uncurry (a: 'a)
 
 (*......................................................................
 Exercise 2: OCaml's built in binary operators, like ( + ) and ( * ) are
