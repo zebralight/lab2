@@ -44,9 +44,14 @@ To think about before you start coding:
 Now implement the two functions curry and uncurry.
 ......................................................................*)
 
-let curry (f : 'a -> 'a -> 'a) (a: 'a) : 'a -> 'a = f a
+let curry (f : ('a * 'a) -> 'a) : 'a -> 'a -> 'a = 
+  fun a -> fun b -> f a b
+
+(*
+js version I needed one more "generation"
+ var cur = f => a => b => f(a,b) *)
      
-let uncurry (a: 'a)
+let uncurry (f : 'a -> 'a -> 'a): 'a -> 'a -> 'a = fun (a, b) -> f a b
 
 (*......................................................................
 Exercise 2: OCaml's built in binary operators, like ( + ) and ( * ) are
@@ -62,7 +67,7 @@ functions.
 ......................................................................*)
 
 let plus =
-  fun _ -> failwith "plus not implemented"
+  uncurry ( + )
      
 let times =
   fun _ -> failwith "times not implemented" ;;
