@@ -132,7 +132,11 @@ useful.
 ......................................................................*)
 
 let min_option (x : int option) (y : int option) : int option =
-  failwith "min_option not implemented" ;;
+  match x, y with
+    | None, None -> None
+    | _, None -> x
+    | None, _ -> y
+    | _, _ -> if x < y then x else y
      
 (*......................................................................
 Exercise 6: Write a function to return the larger of two int options, or
@@ -141,7 +145,11 @@ other.
 ......................................................................*)
 
 let max_option (x : int option) (y : int option) : int option =
-  failwith "max_option not implemented" ;;
+  match x, y with
+    | None, None -> None
+    | _, None -> x
+    | None, _ -> y
+    | _, _ -> if x > y then x else y
 
 (*======================================================================
 Part 3: Polymorphism practice
